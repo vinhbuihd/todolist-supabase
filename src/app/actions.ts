@@ -7,9 +7,13 @@ export const addTodo = async (formData: FormData) => {
   const title = formData.get("title")?.toString();
   if (!title || title.trim() === "") return;
 
+  console.time("Start");
+
   await prisma.todo.create({
     data: { title: title.trim() },
   });
+
+  console.timeEnd("Start");
 
   revalidatePath("/");
 };
