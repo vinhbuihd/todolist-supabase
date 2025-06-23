@@ -25,6 +25,14 @@ jobs:
       DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - name: Install dependencies
         run: yarn install
 
@@ -33,12 +41,7 @@ jobs:
 
       - name: Build Next.js
         run: yarn build
-  test:
-    runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      DIRECT_URL: ${{ secrets.DIRECT_URL }}
-
-    steps:
+        
       - name: Lint
         run: yarn lint
+      
